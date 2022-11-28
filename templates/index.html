@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>MinimalMovie</title>
+    <style>
+        body {
+            background-color: #212529;
+            color: #ffffff;
+            /* background-image: url('https://media1.giphy.com/media/ggK4TpfK2cfuZcokhj/giphy.webp?cid=ecf05e47o0e5j7pciet8x01gdi744zq9v2rdiflfxngnalja&rid=giphy.webp&ct=s'); */
+        }
+.card{
+    position: relative;
+    width: 50%;
+    border: none;
+    
+    
+}
+.card-img-top{
+    display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2/3;
+}
+.card-body{
+    position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #212529;
+  
+  
+}
+.card:hover .card-body {
+    opacity: 0.9;
+    
+}
+.card-text{
+    color: white;
+  font-size: 11px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  
+}
+.col{
+
+max-width: 330px;
+max-height: 412px;
+}
+@media screen and (max-width: 600px) {
+    .col{
+        max-width: 100%;
+        max-height: 100%;
+        padding-left: 114px;
+    }
+    .input-group{
+        padding-right: 110px;
+        padding-left: 50px;
+    }
+    h2{
+      font-size: 20px;
+    }
+}
+  
+
+
+/* .navbar{
+  background-image: url('https://media1.giphy.com/media/ggK4TpfK2cfuZcokhj/giphy.webp?cid=ecf05e47o0e5j7pciet8x01gdi744zq9v2rdiflfxngnalja&rid=giphy.webp&ct=s');
+
+
+} */
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand badge  fw-bold fs-5" style="width: 6rem;padding: 15px;padding-top: 18px;padding-left: 10px;margin-top: 10px;" href="#">MinimalMovie</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+        </div>
+        </nav>
+        
+    
+        
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center">Welcome to MinimalMovie</h1>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center">Search for Movies and Series</h2>
+            </div>
+        </div>
+        <br><br>
+        <div class="row ">
+            <div class="col-12 ">
+                <form action="/results" method="POST">
+                    <div class="input-group mb-3 mx-auto" style="width:500px ;left: auto;">
+                        
+                        <input type="text" class="form-control" placeholder="Search for a movie" aria-label="Recipient's username" aria-describedby="button-addon2" name="movie_name" style="border-radius: 20px;">                                                
+                        <button class="btn btn-outline-secondary bg-primary text-white " type="submit" id="button-addon2" style="border-radius: 20px;border: none;left: 20px;" >Search</button>
+                      </div>
+
+            
+                </form>
+            </div>
+        </div>
+
+        
+
+    </div>
+    <div class="container ">
+        
+        <div class="row">
+            {%for i in trending %} 
+          <div class="col">
+            
+            <div class="card bg-dark" style="width: 18rem;padding: 20px;">
+            <a href="{{url_for('details',movie_id=i.id)}}">
+
+                <img src="https://image.tmdb.org/t/p/w500/{{i.poster_path}}" class="card-img-top" alt="...">
+                <div class="card-body ">
+                  {%if i.media_type == "movie" %}
+                  <p class="card-title text-center pt-4">{{i.title}}</p>
+                  {%else%}
+                  <p class="card-title text-center pt-4">{{i.name}}</p>
+                  {%endif%}
+                  <br>
+                  <p class="card-text text-break">{{i.overview}}</p>
+                </div>
+              </div>
+              </a>
+              
+          </div>
+          {%endfor%}
+          
+
+          </div>
+        </div>
+        <br>
+        
+      </div>
+
+
+
+
+
+
+
+
+    
+</body>
+</html>
